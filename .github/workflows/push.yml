@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ main, master ]   # или ваша ветка по умолчанию
+    branches: [ main, master ]
 
 jobs:
   build-and-push:
@@ -20,6 +20,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Install docker-compose
+        run: |
+          sudo curl -L "https://github.com/docker/compose/releases/download/v2.24.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
 
       - name: Run tests via Docker Compose
         run: make ci
