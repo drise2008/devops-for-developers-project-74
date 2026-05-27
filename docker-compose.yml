@@ -4,4 +4,4 @@ services:
       context: .
       dockerfile: Dockerfile.production
     image: drise2008/devops-for-developers-project-74:latest
-    # volumes убраны (будут в override)
+    command: make test
