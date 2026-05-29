@@ -1,0 +1,14 @@
+localhost {
+  log {
+    format json
+  }
+
+  # Компрессия
+  encode zstd
+
+  # Самоподписанный сертификат (для локального HTTPS)
+  tls internal
+
+  # Проксирование всех запросов в сервис app на порт 8080
+  reverse_proxy /* app:8080
+}
