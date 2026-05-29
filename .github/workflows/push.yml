@@ -2,7 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches:
+      - main
+      - master
 
 jobs:
   build-and-push:
@@ -22,10 +24,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Run tests
-        run: docker compose -f docker-compose.yml up --abort-on-container-exit
+        run: make ci
 
       - name: Build production image
-        run: docker compose -f docker-compose.yml build app
+        run: make build-prod
 
       - name: Push image to Docker Hub
-        run: docker compose -f docker-compose.yml push app
+        run: make push
